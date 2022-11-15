@@ -1,22 +1,29 @@
 {
   "name": "my-movies",
   "scripts": {
-    "dev": "solid-start dev --open",
+    "start": "solid-start dev --open",
     "build": "solid-start build",
-    "start": "solid-start start"
+    "serve": "solid-start start"
   },
   "type": "module",
   "devDependencies": {
+    "@iconify/json": "^2.1.124",
     "autoprefixer": "^10.4.12",
     "postcss": "^8.4.18",
+    "sass": "^1.56.1",
     "solid-start-node": "^0.2.0",
     "tailwindcss": "^3.2.0",
     "typescript": "^4.8.4",
+    "unplugin-icons": "^0.14.13",
     "vite": "^3.1.8"
   },
   "dependencies": {
+    "@solid-primitives/scheduled": "1.1.0",
     "@solidjs/meta": "^0.28.0",
     "@solidjs/router": "^0.5.0",
+    "@types/nprogress": "^0.2.0",
+    "nprogress": "^0.2.0",
+    "solid-heroicons": "^3.1.0",
     "solid-js": "^1.6.0",
     "solid-start": "^0.2.0",
     "undici": "^5.11.0"

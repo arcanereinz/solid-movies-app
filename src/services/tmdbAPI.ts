@@ -103,7 +103,20 @@ export interface IFeatured {
     posters: Record<string, string | number>[];
   };
   credits: {
-    cast: Record<string, string | number>[];
+    cast: {
+      adult: boolean;
+      gender: number;
+      id: number;
+      known_for_department: string;
+      name: string;
+      original_name: string;
+      popularity: number;
+      profile_path: string;
+      cast_id: number;
+      character: string;
+      credit_id: string;
+      order: number;
+    }[];
     crew: Record<string, string | number>[];
   };
   release_dates: {

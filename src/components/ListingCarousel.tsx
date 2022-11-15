@@ -2,10 +2,10 @@ import { createResource, createSignal, For, Show } from 'solid-js';
 import { A } from 'solid-start';
 import { Card } from './Card';
 import { css } from 'solid-styled-components';
-import chevronLeftImg from '../assets/images/chevron-left.svg';
-import chevronRightImg from '../assets/images/chevron-right.svg';
 import { formatToId } from '~/utils/format';
 import { TMediaItems } from '~/services/tmdbAPI';
+import { ChevronLeft } from './ChevronLeft';
+import { ChevronRight } from './ChevronRight';
 
 function max(a, b) {
   return a > b || (b ?? null) === null ? a : b;
@@ -23,7 +23,7 @@ export function ListingCarousel(props: {
   viewAllUrl?: boolean;
 }) {
   const btnClass = css`
-    opacity: 0%;
+    opacity: 30%;
     &:hover {
       opacity: 100%;
       transition: 500ms;
@@ -51,7 +51,7 @@ export function ListingCarousel(props: {
 
         <div class="carousel">
           <button
-            class={`carousel__nav carousel__nav--left ${btnClass}`}
+            class={['carousel__nav carousel__nav--left', btnClass].join(' ')}
             aria-label="Previous"
             type="button"
             // disabled="disableLeftButton"
@@ -85,11 +85,7 @@ export function ListingCarousel(props: {
               });
             }}
           >
-            <img
-              src={chevronLeftImg}
-              class="ml-5 w-10 h-10 text-gray-400 hover:block"
-              alt="left-navigation"
-            />
+            <ChevronLeft />
           </button>
 
           <div class="carousel__items" style={`svg { display: hidden; }`}>
@@ -113,7 +109,7 @@ export function ListingCarousel(props: {
           </div>
 
           <button
-            class={`carousel__nav carousel__nav--right ${btnClass}`}
+            class={['carousel__nav carousel__nav--right', btnClass].join(' ')}
             aria-label="Next"
             type="button"
             // disabled="disableRightButton"
@@ -134,11 +130,7 @@ export function ListingCarousel(props: {
               // console.log('nang', colId());
             }}
           >
-            <img
-              src={chevronRightImg}
-              class="ml-5 w-10 h-10 text-gray-400 hover:block"
-              alt="right-navigation"
-            />
+            <ChevronRight />
           </button>
         </div>
       </div>

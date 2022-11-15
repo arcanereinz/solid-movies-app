@@ -1,22 +1,30 @@
-import { Show } from "solid-js";
-import { createRouteData, useRouteData } from "solid-start";
-import Hero from "~/components/Hero";
-import { ListingCarousel } from "~/components/ListingCarousel";
-import { getListItem, getMovie, getTrending, getTvShow } from "~/services/tmdbAPI";
+import { createSignal, Show } from 'solid-js';
+import { createRouteData, useRouteData } from 'solid-start';
+import Hero from '~/components/Hero';
+import { ListingCarousel } from '~/components/ListingCarousel';
+import {
+  getListItem,
+  getMovie,
+  getTrending,
+  getTvShow,
+  IFeatured,
+  ITrendingMovies,
+  ITrendingTvShows,
+} from '~/services/tmdbAPI';
 
 export function routeData() {
   return createRouteData(async () => {
     try {
-      const trendingMovies = await getTrending("movie");
-      const trendingTv = await getTrending("tv");
-      let featured;
+      const trendingMovies = await getTrending<ITrendingMovies>('movie');
+      const trendingTv = await getTrending<ITrendingTvShows>('tv');
+      let featured!: IFeatured;
 
       // feature a random item from movies or tv
       const items = [...trendingMovies.results, ...trendingTv.results];
       const randomItem = items[Math.floor(Math.random() * items.length)];
-      const media = randomItem.title ? "movie" : "tv";
+      const media = 'title' in randomItem ? 'movie' : 'tv';
 
-      if (media === "movie") {
+      if (media === 'movie') {
         featured = await getMovie(randomItem.id);
       } else {
         featured = await getTvShow(randomItem.id);
@@ -25,29 +33,36 @@ export function routeData() {
       return {
         trendingMovies,
         trendingTv,
-        featured
+        featured,
       };
     } catch {
-      throw new Error("Data not available");
+      throw new Error('Data not available');
     }
   });
 }
 
 export default function Page() {
   const data = useRouteData<typeof routeData>();
+  // const [first, setFirst] = createSignal(1);
   return (
     <main class="main">
       <Show when={data()}>
         <Hero item={data()?.featured} />
+        {/* <button
+          onClick={() => setFirst(first() + 1)}
+          style={{ 'background-color': 'darkcyan' }}
+        >
+          nang more than{first()}
+        </button> */}
         <ListingCarousel
           items={data()?.trendingMovies.results}
           viewAllHref={`/movie/categories/trending`}
-          title={getListItem("movie", "trending").TITLE}
+          title={getListItem('movie', 'trending').TITLE}
         />
         <ListingCarousel
           items={data()?.trendingTv.results}
           viewAllHref={`/tv/categories/trending`}
-          title={getListItem("tv", "trending").TITLE}
+          title={getListItem('tv', 'trending').TITLE}
         />
       </Show>
       {/* <Show when={trendingMoviesShown}></Show> */}

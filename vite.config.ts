@@ -8,8 +8,8 @@ export default defineConfig({
       compiler: 'solid',
     }),
     solid({
-      islands: true,
-      islandsRouter: true,
+      // islands: true,
+      // islandsRouter: true,
       // ssr: false,
     }),
   ],

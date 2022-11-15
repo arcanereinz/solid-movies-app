@@ -2,7 +2,7 @@
   "name": "my-movies",
   "scripts": {
     "start": "solid-start dev --open",
-    "build": "solid-start build",
+    "build": "rm -rf dist && solid-start build",
     "serve": "solid-start start"
   },
   "type": "module",
@@ -26,6 +26,7 @@
     "solid-heroicons": "^3.1.0",
     "solid-js": "^1.6.0",
     "solid-start": "^0.2.0",
+    "solid-styled-components": "^0.28.5",
     "undici": "^5.11.0"
   },
   "engines": {

@@ -1,18 +1,18 @@
-import { LANGUAGES } from "./constants/languages";
+import { LANGUAGES } from './constants/languages';
 
 export function formatDate(date: string) {
-  return new Date(date).toLocaleDateString("en-us", {
-    year: "numeric",
-    month: "long",
-    day: "numeric"
+  return new Date(date).toLocaleDateString('en-us', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   });
 }
 
 export function formatCurrency(amount: number) {
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
   });
 
   return formatter.format(amount);
@@ -30,15 +30,36 @@ export function formatRuntime(minutes: number) {
   const mins = Math.floor(secondsLeft / 60);
   secondsLeft = secondsLeft % 60;
 
-  return `${hours ? hours + "h" : ""} ${mins}min`;
+  return `${hours ? hours + 'h' : ''} ${mins}min`;
 }
 
 export function formatLanguage(iso: string) {
-  const fullLang = LANGUAGES.find(lang => lang.iso_639_1 === iso);
+  const fullLang = LANGUAGES.find((lang) => lang.iso_639_1 === iso);
 
   if (fullLang) {
     return fullLang.english_name;
   }
 
   return iso;
+}
+
+/**
+ * Format any string to an id
+ * @param section Base string used to differentiate sections
+ * @param componentName Component name
+ * @param index Used to generate unique ids
+ * @returns
+ */
+export function formatToId(
+  section: string,
+  componentName: string,
+  index?: number,
+) {
+  return (
+    section.toLowerCase().replaceAll(' ', '_') +
+    '_' +
+    componentName +
+    '__' +
+    (index ?? '')
+  );
 }

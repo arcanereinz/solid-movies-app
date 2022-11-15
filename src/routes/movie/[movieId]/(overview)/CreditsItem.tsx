@@ -1,5 +1,5 @@
-import { A } from "solid-start";
-import "./CreditItems.scss";
+import { A } from 'solid-start';
+import './CreditItems.scss';
 
 export function CreditsItem(props) {
   return (

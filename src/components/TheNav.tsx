@@ -17,7 +17,7 @@ export function TheNav() {
     <nav class={styles.nav}>
       <ul class="nolist">
         <li class={styles.logo}>
-          <img src="/solidjs.svg" width={48} height={48} />
+          <img alt="logo" src="/solidjs.svg" width={48} height={48} />
         </li>
         <li>
           <A href="/" end aria-label="Home">

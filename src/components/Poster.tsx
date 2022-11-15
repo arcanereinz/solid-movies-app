@@ -1,6 +1,6 @@
-"use client";
-import { createSignal, JSX, splitProps } from "solid-js";
-import styles from "./Poster.module.scss";
+'use client';
+import { createSignal, JSX, splitProps } from 'solid-js';
+import styles from './Poster.module.scss';
 
 const lerp = (min: number, max: number, percentage: number) =>
   min * (1 - percentage) + max * percentage;
@@ -8,7 +8,7 @@ const lerp = (min: number, max: number, percentage: number) =>
 type PosterProps = JSX.ImgHTMLAttributes<HTMLImageElement> & {};
 
 export default function Poster(props: PosterProps) {
-  const [local, imgProps] = splitProps(props, ["class"]);
+  const [local, imgProps] = splitProps(props, ['class']);
   //this might have been done with just two signals but it would've required
   //calcs in css and it would've been far less readable
   const [xOffset, setXOffset] = createSignal(0);
@@ -18,8 +18,10 @@ export default function Poster(props: PosterProps) {
   return (
     <div
       class={styles.wrapper}
-      onPointerMove={e => {
-        const { width, height, x, y } = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
+      onPointerMove={(e) => {
+        const { width, height, x, y } = (
+          e.currentTarget as HTMLDivElement
+        ).getBoundingClientRect();
         const percentageX = (e.clientX - x) / width;
         const percentageY = (e.clientY - y) / height;
         setXOffset(lerp(-15, 15, percentageX));
@@ -34,13 +36,13 @@ export default function Poster(props: PosterProps) {
         setSpotY(50);
       }}
       style={{
-        "--x-off": xOffset(),
-        "--y-off": yOffset(),
-        "--spot-x": spotX(),
-        "--spot-y": spotY()
+        '--x-off': xOffset(),
+        '--y-off': yOffset(),
+        '--spot-x': spotX(),
+        '--spot-y': spotY(),
       }}
     >
-      <img class={[styles.poster, local.class].join(" ")} {...imgProps} />
+      <img class={[styles.poster, local.class].join(' ')} {...imgProps} />
     </div>
   );
 }

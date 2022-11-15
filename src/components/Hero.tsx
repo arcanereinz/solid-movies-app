@@ -1,14 +1,19 @@
-import { Show } from "solid-js";
-import { formatRuntime } from "~/utils/format";
-import styles from "./Hero.module.scss";
+import { Show } from 'solid-js';
+import { IFeatured } from '~/routes/(home)';
+import { formatRuntime } from '~/utils/format';
+import styles from './Hero.module.scss';
 
-export function Hero(props) {
-  const stars = () => (props.item.vote_average ? props.item.vote_average * 10 : 0);
+export function Hero(props: {
+  item: IFeatured;
+  trailer?: Record<string, any>;
+}) {
+  const stars = () =>
+    props.item.vote_average ? props.item.vote_average * 10 : 0;
   const name = () => (props.item.title ? props.item.title : props.item.name);
   const yearStart = () => {
     const date = props.item.release_date || props.item.first_air_date;
     if (date) {
-      return date.split("-")[0];
+      return date.split('-')[0];
     }
   };
 
@@ -30,10 +35,10 @@ export function Hero(props) {
             <img
               // src={"https://image.tmdb.org/t/p/original" + props.item.backdrop_path}
               src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces${props.item.backdrop_path}`}
-              alt=""
+              alt="hero"
               class={styles.image}
               style={{
-                height: "100%"
+                height: '100%',
               }}
             />
             {/* <nuxt-picture
